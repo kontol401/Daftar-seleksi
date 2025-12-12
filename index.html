@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Seleksi AEX</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: black;
+            color: white;
+            background-image: radial-gradient(white 1px, transparent 1px),
+            radial-gradient(white 1px, transparent 1px);
+            background-size: 3px 3px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 10px;
+            border: 2px solid #555;
+        }
+
+        input, textarea, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border-radius: 5px;
+            border: none;
+            font-size: 15px;
+        }
+
+        button {
+            background: #1e90ff;
+            color: white;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #0b70d1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 style="text-align:center;">HALO SELAMAT DATANG DI AEX</h2>
+    <p style="text-align:center;">Silakan mengisi formulir seleksi di bawah ini.</p>
+
+    <form id="aexForm">
+        <label>Nama:</label>
+        <input type="text" id="nama" required>
+
+        <label>Tanggal Lahir:</label>
+        <select id="tanggal" required></select>
+
+        <label>Bulan Lahir:</label>
+        <select id="bulan" required></select>
+
+        <label>Tahun Lahir:</label>
+        <select id="tahun" required></select>
+
+        <label>Alasan bergabung:</label>
+        <textarea id="alasan" placeholder="Masukkan alasan kamu..." required></textarea>
+
+        <label>Tujuan bergabung:</label>
+        <textarea id="tujuan" placeholder="Masukkan tujuan kamu..." required></textarea>
+
+        <label>Pengetahuan astronomi:</label>
+        <textarea id="astro" placeholder="Contoh: Bintang adalah ..." required></textarea>
+
+        <button type="submit">KIRIM FORMULIR</button>
+    </form>
+</div>
+
+<script>
+// Isi dropdown tanggal
+for (let i = 1; i <= 31; i++) {
+    tanggal.innerHTML += `<option value="${i}">${i}</option>`;
+}
+
+// Isi dropdown bulan
+const bulanNama = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+for (let i = 0; i < 12; i++) {
+    bulan.innerHTML += `<option value="${i+1}">${bulanNama[i]}</option>`;
+}
+
+// Isi dropdown tahun
+let tahunSekarang = new Date().getFullYear();
+for (let i = tahunSekarang; i >= 1950; i--) {
+    tahun.innerHTML += `<option value="${i}">${i}</option>`;
+}
+
+document.getElementById("aexForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let tahunLahir = document.getElementById("tahun").value;
+    let umur = tahunSekarang - tahunLahir;
+
+    if (umur < 10) {
+        alert("Maaf, kamu dibawah umur (minimal 10 tahun)");
+        return;
+    }
+
+    // Setelah lolos umur → pindah ke success.html
+    window.location.href = "success.html";
+});
+</script>
+
+</body>
+</html>
